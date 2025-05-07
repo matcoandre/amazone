@@ -61,7 +61,7 @@ import { Icon } from '@iconify/vue'
         <div id="slide3" class="carousel-item relative w-full justify-center">
           <div class="card md:card-side bg-base-100 h-128 shadow-lg md:h-64">
             <figure>
-              <img src="../../public/sos.jpg" alt="Album" />
+              <img src="/public/sos.jpg" alt="Album" />
             </figure>
             <div class="card-body">
               <h2 class="card-title">Il bosco di merda</h2>
