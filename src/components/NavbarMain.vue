@@ -5,7 +5,7 @@ import { Icon } from '@iconify/vue'
 <template>
   <div class="navbar bg-base-100 shadow-sm">
     <div class="navbar-start hidden md:flex">
-      <a class="btn btn-ghost text-2xl">AmaZone</a>
+      <img src="/public/logo_white.png" class="p-1 w-24" />
     </div>
     <div class="navbar-center flex-1 md:flex-none">
       <label class="input">
@@ -41,19 +41,28 @@ import { Icon } from '@iconify/vue'
             <div class="w-10 rounded-full">
               <img
                 alt="Profile picture"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                src="../../public/propic_placeholder.png"
               />
             </div>
           </div>
           <ul
             tabindex="0"
-            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-32 p-2 shadow"
           >
-            <li>
+            <!-- <li>
               <a class="justify-between"> Profile </a>
             </li>
-            <li><a>Settings</a></li>
-            <li><a>Logout</a></li>
+            <li><a>Settings</a></li> -->
+            <li>
+              <RouterLink to="/login">
+                Login
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/register">
+                Sign up
+              </RouterLink>
+            </li>
           </ul>
         </div>
       </div>

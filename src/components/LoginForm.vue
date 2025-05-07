@@ -1,61 +1,76 @@
+<script setup>
+import { Icon } from '@iconify/vue'
+</script>
+
 <template>
-  <div>
-    <main
-      class="animate__animated animate__zoomIn animate__faster w-full max-w-lg rounded-xl bg-white shadow-xl drop-shadow-xl duration-100 dark:bg-neutral-900"
-      x-transition
-    >
-      <div x-data="{ currentView: 'all' }" class="flex flex-col items-center justify-center p-10">
-        <div
-          x-show="currentView == 'all'"
-          class="flex flex-col items-center justify-center transition"
-        >
-          <img src="" class="mb-5 hidden w-40 dark:inline-block" />
-          <img src="" class="mb-5 w-40 dark:hidden" />
-          <h1
-            id="cheer"
-            class="text-center text-2xl font-semibold text-neutral-900 dark:text-neutral-100"
-          >
-            <!-- Gestito dalla funzione JS/jQuery -->
-          </h1>
-          <h3 class="text-xl text-neutral-600 dark:text-neutral-300">Accedi per continuare</h3>
-          <form id="login" class="flex flex-col" onsubmit="return event.preventDefault()">
-            <div class="flex flex-col items-center justify-center space-y-2 text-xl">
-              <input
-                id="user"
-                type="text"
-                name="email"
-                class="mt-2 rounded-lg border-slate-500 px-1"
-                placeholder="Nome utente"
-                required
-              />
-              <input
-                id="pw"
-                type="password"
-                name="pw"
-                class="mt-1 rounded-lg border-slate-500 px-1"
-                placeholder="Password"
-                required
-              />
+  <div class="flex items-center h-screen w-screen">
+    <div class="w-screen h-screen">
+      <img class="w-screen h-screen" src="https://picsum.photos/1920/1080/" alt="Background">
+    </div>
+    <div class="flex justify-end items-center w-md bg-base-100 h-screen">
+      <div class="flex flex-col p-10">
+        <div class="flex flex-col items-center justify-center space-y-5">
+          <img src="/logo_white.png" class="w-40" />
+            <h1 class="text-center text-2xl font-semibold dark:text-neutral-100">
+              Welcome back! 👋
+            </h1>
+          <form class="space-y-3">
+            <div>
+              <label class="input validator">
+                <Icon icon="lucide:user" class="h-[1em] opacity-50"></Icon>
+                <input
+                  type="text"
+                  required
+                  placeholder="Username"
+                  id="username"
+                  v-model="username"
+                  pattern="[A-Za-z][A-Za-z0-9\-]*"
+                  minlength="3"
+                  maxlength="30"
+                  title="Only letters, numbers or dash"
+                />
+              </label>
+              <p class="validator-hint hidden">
+                Must be 3 to 30 characters
+                <br />containing only letters, numbers or dash
+              </p>
             </div>
-            <div class="flex flex-grow items-center justify-center space-x-2">
-              <button
-                id="submit"
-                type="submit"
-                name="submit"
-                class="mx-auto mt-4 w-40 min-w-max rounded-lg border-2 px-1"
-                onclick="pasuser(this.form)"
-              >
-                Accedi
-              </button>
+            <div>
+              <label class="input validator">
+                <Icon icon="lucide:key-round" class="h-[1em] opacity-50"></Icon>
+                <input
+                  type="password"
+                  required
+                  placeholder="Password"
+                  minlength="8"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+                />
+              </label>
+              <p class="validator-hint hidden">
+                Must be more than 8 characters, including
+                <br />At least one number <br />At least one lowercase letter <br />At least one uppercase letter
+              </p>
+            </div>
+            <div class="flex justify-center items-center">
+              <button class="btn btn-primary btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl mt-3" type="submit">Sign in</button>
             </div>
           </form>
+          <div class="flex justify-center items-center">
+            <p>
+              First time?
+              <RouterLink to="/register" class="link">
+                    Sign up!
+              </RouterLink>
+            </p>
+          </div>
         </div>
       </div>
-    </main>
+    </div>
   </div>
 </template>
 
-<script>
+<!-- <script>
 const d = new Date()
 const hour = d.getHours()
 var cheerText = ''
@@ -67,4 +82,4 @@ else if (hour >= 12 && hour < 18) cheerText = 'Buon pomeriggio! 👋🏻'
 else cheerText = 'Buonanotte! 😴'
 
 cheerElement.innerText(cheerText)
-</script>
+</script> -->

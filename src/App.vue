@@ -1,10 +1,12 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
 import NavbarMain from './components/NavbarMain.vue'
+
+const route = useRoute()
 </script>
 
 <template>
-  <NavbarMain />
+  <NavbarMain v-if="route.name != 'login' && route.name != 'register'" />
   <RouterView />
 </template>
 
