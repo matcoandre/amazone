@@ -1,5 +1,5 @@
 <script setup>
-import CarouselTop3 from '../components/CarouselTop3.vue'
+import CarouselTop3 from '../components/CarouselTop.vue'
 </script>
 
 <template>
