@@ -3,18 +3,23 @@ import { Icon } from '@iconify/vue'
 </script>
 
 <template>
-  <div class="flex items-center h-screen w-screen">
-    <div class="w-screen h-screen">
-      <img class="w-screen h-screen" src="https://picsum.photos/1920/1080/" alt="Background">
+  <div class="flex items-center h-screen w-screen justify-center">
+    <div class="w-screen h-screen hidden md:inline">
+      <img class="w-screen h-screen object-cover" src="https://picsum.photos/1920/1080/" alt="Background">
     </div>
-    <div class="flex justify-end items-center w-md bg-base-100 h-screen">
+    <div class="flex justify-center md:justify-end items-center w-md bg-base-100 h-screen">
       <div class="flex flex-col p-10">
+        <div>
+          <RouterLink to="/">
+            <Icon icon="lucide:arrow-left" class="h-5"/>
+          </RouterLink>
+        </div>
         <div class="flex flex-col items-center justify-center space-y-5">
-          <img src="/logo_white.png" class="w-40" />
+          <img src="/public/logo_white.png" class="w-40" />
             <h1 class="text-center text-2xl font-semibold dark:text-neutral-100">
               Welcome back! 👋
             </h1>
-          <form class="space-y-3">
+            <form class="space-y-3 flex flex-col">
             <div>
               <label class="input validator">
                 <Icon icon="lucide:user" class="h-[1em] opacity-50"></Icon>
@@ -53,7 +58,7 @@ import { Icon } from '@iconify/vue'
               </p>
             </div>
             <div class="flex justify-center items-center">
-              <button class="btn btn-primary btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl mt-3" type="submit">Sign in</button>
+              <button class="btn btn-primary md:btn-md lg:btn-lg xl:btn-xl mt-3" type="submit">Sign in</button>
             </div>
           </form>
           <div class="flex justify-center items-center">

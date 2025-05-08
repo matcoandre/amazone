@@ -1,25 +1,66 @@
 <script setup>
 import { Icon } from '@iconify/vue'
+import { onMounted, ref } from 'vue'
+import axios from 'axios'
+
+let books = ref([])
+
+onMounted(function() {
+  // axios.get('https://www.dbooks.org/api/recent')
+  //   .then((response) => {
+  //     books.value = response.data.books
+  //   })
+  //   .catch((error) => {
+  //     console.error('Error fetching books:', error)
+  //   })
+
+  axios.get('https://www.dbooks.org/api/recent')
+    .then((response) => {
+      response.data.books.slice(0, 3).map((book) => {
+        axios.get(`https://www.dbooks.org/api/book/${book.id.replace('X', '')}`)
+          .then((response) => {
+            books.value.push(response.data)
+          })
+          .catch((error) => {
+            console.error('Error fetching book details:', error)
+          })
+      })
+    })
+    .catch((error) => {
+      console.error('Error fetching books:', error)
+    })
+
+ })
 </script>
 
 <template>
   <div>
-    <h1 class="flex items-center justify-center p-5 font-bold md:justify-start">Ultime uscite</h1>
+    <h1 class="flex items-center justify-center p-5 font-bold md:justify-start">Latest releases</h1>
     <div class="flex flex-row">
       <div class="carousel w-full">
         <div id="slide1" class="carousel-item relative w-full justify-center">
           <div class="card md:card-side bg-base-100 h-128 shadow-lg md:h-64">
-            <figure>
-              <img src="https://www.ibs.it/images/9788804766520_0_0_536_0_75.jpg" alt="Album" />
+            <figure v-if="books.length >0">
+              <img v-bind:src="books[0].image" alt="Album">
             </figure>
+            <span v-else class="loading loading-dots loading-sm"></span>
             <div class="card-body">
-              <h2 class="card-title">Il libro dei risvolti</h2>
-              <h3 class="italic">Italo Calvino</h3>
-              <p>Un libro di merda, terribile. Veramente pessimo, scritto coi piedi.</p>
+              <h2 v-if="books.length >0" class="card-title">
+                {{ books[0].title }}
+              </h2>
+              <span v-else class="loading loading-dots loading-sm"></span>
+              <h3 v-if="books.length >0" class="italic">
+                {{ books[0].authors }}
+              </h3>
+              <span v-else class="loading loading-dots loading-sm"></span>
+              <p v-if="books.length > 0" class="w-128">
+                {{ books[0].description }}
+              </p>
+              <span v-else class="loading loading-dots loading-sm"></span>
               <div class="card-actions justify-end">
                 <button class="btn btn-primary">
                   <Icon icon="lucide:shopping-cart" class="h-5 w-5" />
-                  Aggiungi al carrello
+                  Add to cart
                 </button>
               </div>
             </div>
@@ -33,20 +74,27 @@ import { Icon } from '@iconify/vue'
         </div>
         <div id="slide2" class="carousel-item relative w-full justify-center">
           <div class="card md:card-side bg-base-100 h-128 shadow-lg md:h-64">
-            <figure>
-              <img
-                src="https://cdn.shortpixel.ai/spai11/q_lossy+w_1019+to_auto+ret_img/blogs.youcanprint.it/wp-content/uploads/2022/05/61xSNpivMML.jpeg"
-                alt="Album"
-              />
+            <figure v-if="books.length >0">
+              <img v-bind:src="books[1].image" alt="Album">
             </figure>
+            <span v-else class="loading loading-dots loading-sm"></span>
             <div class="card-body">
-              <h2 class="card-title">Dante</h2>
-              <h3 class="italic">Alessandro Barbero</h3>
-              <p>Altro libro terribile. 0/10. Barbero, succhiami il pisnelo.</p>
+              <h2 v-if="books.length >0" class="card-title">
+                {{ books[1].title }}
+              </h2>
+              <span v-else class="loading loading-dots loading-sm"></span>
+              <h3 v-if="books.length >0" class="italic">
+                {{ books[1].authors }}
+              </h3>
+              <span v-else class="loading loading-dots loading-sm"></span>
+              <p v-if="books.length > 0" class="w-128">
+                {{ books[1].description }}
+              </p>
+              <span v-else class="loading loading-dots loading-sm"></span>
               <div class="card-actions justify-end">
                 <button class="btn btn-primary">
                   <Icon icon="lucide:shopping-cart" class="h-5 w-5" />
-                  Aggiungi al carrello
+                  Add to cart
                 </button>
               </div>
             </div>
@@ -60,17 +108,27 @@ import { Icon } from '@iconify/vue'
         </div>
         <div id="slide3" class="carousel-item relative w-full justify-center">
           <div class="card md:card-side bg-base-100 h-128 shadow-lg md:h-64">
-            <figure>
-              <img src="/public/sos.jpg" alt="Album" />
+            <figure v-if="books.length > 0">
+              <img v-bind:src="books[2].image" alt="Album">
             </figure>
+            <span v-else class="loading loading-dots loading-sm"></span>
             <div class="card-body">
-              <h2 class="card-title">Il bosco di merda</h2>
-              <h3 class="italic">D. Ocane</h3>
-              <p>Tu sai cosa si nasconde nella foresta di Bergamo? Yara Gambirasio. (spoiler)</p>
+              <h2 v-if="books.length > 0" class="card-title">
+                {{ books[2].title }}
+              </h2>
+              <span v-else class="loading loading-dots loading-sm"></span>
+              <h3 v-if="books.length > 0" class="italic">
+                {{ books[2].authors }}
+              </h3>
+              <span v-else class="loading loading-dots loading-sm"></span>
+              <p v-if="books.length > 0" class="w-128">
+                {{ books[2].description }}
+              </p>
+              <span v-else class="loading loading-dots loading-sm"></span>
               <div class="card-actions justify-end">
                 <button class="btn btn-primary">
                   <Icon icon="lucide:shopping-cart" class="h-5 w-5" />
-                  Aggiungi al carrello
+                  Add to cart
                 </button>
               </div>
             </div>
